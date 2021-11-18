@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App1.MainPage">
+
+
+    <ContentPage.ToolbarItems>
+        
+        
+        
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="Term" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+
+        <Label Text="Select a term" FontSize="Title" Padding="30,24,30,0"/>
+        <Frame BackgroundColor="#2196F3" Padding="50" CornerRadius="0">
+            <Label Text="PlaceHolder" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Button Text="Courses"
+                x:Name="coursesButton"
+                Clicked="coursesButton_Clicked"/>
+        <Button Text="Add Term"
+                x:Name="addTermButton"
+                Clicked="addTermButton_Clicked"/>
+        <Button Text="Update Term"
+                x:Name="updateTermButton"
+                Clicked="updateTermButton_Clicked"/>
+        <Button Text="Delete Term"
+                x:Name="deleteTermButton"
+                Clicked="deleteTermButton_Clicked"/>
+
+    </StackLayout>
+
+
+
+</ContentPage>

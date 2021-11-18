@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App1.Summary">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save"
+                     Clicked="ToolbarItem_Clicked"/>
+
+
+    </ContentPage.ToolbarItems>
+
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+                <Label Text="Course Summary" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            </Frame>
+
+            <Label Text="course info" FontSize="Title" Padding="30,24,30,0"/>
+            <Entry Placeholder="Course Name"/>
+            <Entry Placeholder="Start Date"/>
+            <Entry Placeholder="End Date"/>
+            <Entry Placeholder="Instructor Name"/>
+            <Entry Placeholder="Instructor Email"/>
+            <Entry Placeholder="Instructor Phone"/>
+            <Editor Placeholder="Notes"
+                    HeightRequest="80"/>
+            <Button Text="Add/Share/Display Notes"/>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
