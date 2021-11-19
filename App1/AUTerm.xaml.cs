@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App1.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,19 @@ namespace App1
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
+            Table table = new Table()
+            {
+                termName = entryTermName.Text,
+                termStart = datePickerTermStart.Date.ToShortDateString(),
+                termEnd = DatePickerTermEnd.Date.ToShortDateString()
+            };
 
+            using(SQLite.SQLiteConnection con = new SQLite.SQLiteConnection(App.FilePath))
+            {
+                con.CreateTable<Table>();
+                int rows = con.Insert(table);
+
+            }
         }
     }
 }

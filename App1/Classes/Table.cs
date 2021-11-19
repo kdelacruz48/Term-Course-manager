@@ -13,8 +13,8 @@ namespace App1.Classes
         [PrimaryKey,AutoIncrement]
         public int iD { get; set; }
         public string termName { get; set; }
-        public int termStart { get; set; }              //you will probably have to change the types for the pickers
-        public int termend { get; set; }
+        public string termStart { get; set; }              //you will probably have to change the types for the pickers
+        public string termEnd { get; set; }
         public string courseName1 { get; set; }
         public string status1 { get; set; }
         public int courseStart1 { get; set; }

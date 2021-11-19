@@ -17,9 +17,28 @@
         </Frame>
 
         <Label Text="Select a term" FontSize="Title" Padding="30,24,30,0"/>
-        <Frame BackgroundColor="#2196F3" Padding="50" CornerRadius="0">
-            <Label Text="PlaceHolder" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
+        <ListView x:Name="termListVeiw" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding termName}" Detail="{Binding Path=termStart}"  TextColor="Purple"/>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TableView x:Name="termTableView" Intent="Settings">
+            <TableRoot>
+                <TableSection Title="???">
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding termName}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+
+
         <Button Text="Courses"
                 x:Name="coursesButton"
                 Clicked="coursesButton_Clicked"/>

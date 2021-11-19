@@ -1,10 +1,13 @@
-﻿using System;
+﻿using App1.Classes;
+using SQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+
 
 namespace App1
 {
@@ -43,6 +46,19 @@ namespace App1
         private void coursesButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Courses());
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            using(SQLiteConnection con = new SQLiteConnection(App.FilePath))
+            {
+                con.CreateTable<Table>();
+                var table = con.Table<Table>().ToList();
+
+                termTableView. = table;
+            }
         }
     }
 }
