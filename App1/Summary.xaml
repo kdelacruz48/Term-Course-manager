@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              x:Class="App1.Summary">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save"
@@ -11,23 +11,41 @@
 
 
     <ContentPage.Content>
-        <StackLayout>
-            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+        <ScrollView>
+            <StackLayout>
+            <Frame BackgroundColor="#2196F3" Padding="1" CornerRadius="0">
                 <Label Text="Course Summary" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
 
             <Label Text="course info" FontSize="Title" Padding="30,24,30,0"/>
-            <Entry Placeholder="Course Name"/>
-            <Entry Placeholder="Start Date"/>
-            <Entry Placeholder="End Date"/>
-            <Entry Placeholder="Instructor Name"/>
-            <Entry Placeholder="Instructor Email"/>
-            <Entry Placeholder="Instructor Phone"/>
-            <Editor Placeholder="Notes"
+            <Entry x:Name="entryCourseName" Placeholder="Course Name"/>
+            <StackLayout Margin="0,-10,0,5">
+                <Label Text="Start Date"/>
+                <DatePicker x:Name="datePickerCourseStart" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                </DatePicker>
+
+                <Label Text="End Date"/>
+                <DatePicker x:Name="DatePickerCourseEnd" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                </DatePicker>
+            </StackLayout>
+            <Picker x:Name="statusPicker" Title="Course status">
+                <Picker.Items>
+                    <x:String> Active </x:String>
+                    <x:String> Inactive</x:String>
+                </Picker.Items>
+            </Picker>
+            <Entry x:Name="entryInstructorName" Placeholder="Instructor Name"/>
+            <Entry x:Name="entryInstructorEmail" Placeholder="Instructor Email"/>
+            <Entry x:Name="entryInstructorPhone" Placeholder="Instructor Phone"/>
+            <Editor x:Name="entryNotes" 
+                Placeholder="Notes"
                     HeightRequest="80"/>
-            <Button Text="Add/Share/Display Notes"/>
+            <Button x:Name="shareButton" Text="Share Notes" Clicked="shareButton_Clicked"/>
 
 
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

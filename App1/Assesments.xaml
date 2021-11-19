@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              x:Class="App1.Assesments">
 
     <ContentPage.ToolbarItems>
@@ -12,18 +12,36 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Frame BackgroundColor="#2196F3" Padding="1" CornerRadius="0">
                 <Label Text="Assesments" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
 
             <Label Text="Assesment info" FontSize="Title" Padding="30,24,30,0"/>
-            <Entry Placeholder="OA"/>
-            <Entry Placeholder="Start Date"/>
-            <Entry Placeholder="End Date"/>
-            <Button Text="Notifications"/>
-            <Entry Placeholder="pA"/>
-            <Entry Placeholder="Start Date"/>
-            <Entry Placeholder="End Date"/>
+            <Entry x:Name="entryOA" Placeholder="OA"/>
+            <StackLayout Margin="0,-10,0,5">
+                <Label Text="Start Date"/>
+                <DatePicker x:Name="datePickerOAStart" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                </DatePicker>
+
+                <Label Text="End Date"/>
+                <DatePicker x:Name="DatePickerOAEnd" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                </DatePicker>
+            </StackLayout>
+            
+            <Entry x:Name="entryPA" Placeholder="PA"/>
+            <StackLayout Margin="0,-10">
+                <Label Text="Start Date"/>
+                <DatePicker x:Name="datePickerPAStart" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                </DatePicker>
+
+                <Label Text="End Date"/>
+                <DatePicker x:Name="DatePickerPAEnd" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                </DatePicker>
+            </StackLayout>
             <Button Text="Notifications"/>
 
 

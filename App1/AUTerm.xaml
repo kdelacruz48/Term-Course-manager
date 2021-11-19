@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              x:Class="App1.AUTerm">
 
     <ContentPage.ToolbarItems>
@@ -12,15 +12,26 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Frame BackgroundColor="#2196F3" Padding="1" CornerRadius="0">
                 <Label Text="Add/Update Term" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
 
             <Label Text="Term info" FontSize="Title" Padding="30,24,30,0"/>
 
-            <Entry Placeholder="Course Name"/>
-            <Entry Placeholder="Start Date"/>
-            <Entry Placeholder="End Date"/>
+            <Entry x:Name="entryTermName" Placeholder="Term Name"/>
+
+            <StackLayout Margin="0,10">
+                <Label Text="Start Date"/>
+                <DatePicker x:Name="datePickerTermStart" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                </DatePicker>
+            
+                <Label Text="End Date"/>
+                <DatePicker x:Name="DatePickerTermEnd" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                   <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                </DatePicker>
+            </StackLayout>
+
 
         </StackLayout>
     </ContentPage.Content>
