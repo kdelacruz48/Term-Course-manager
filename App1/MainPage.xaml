@@ -18,25 +18,29 @@
 
         <Label Text="Select a term" FontSize="Title" Padding="30,24,30,0"/>
         <ListView x:Name="termListVeiw" >
+            <ListView.Header>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Term Name" TextColor="Purple"/>
+                    <Label Text="| Start"/>
+                    <Label Text="| End"/>
+                </StackLayout>
+            </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding termName}" Detail="{Binding Path=termStart}"  TextColor="Purple"/>
-                    
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding termName}"  TextColor="Purple"/>
+                                <Label Text="{Binding termStart}"/>
+                                <Label Text="{Binding termEnd}"/>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <TableView x:Name="termTableView" Intent="Settings">
-            <TableRoot>
-                <TableSection Title="???">
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding termName}"/>
-                        </StackLayout>
-                    </ViewCell>
-                </TableSection>
-            </TableRoot>
-        </TableView>
+       
 
 
         <Button Text="Courses"

@@ -13,6 +13,10 @@ namespace App1
 {
     public partial class MainPage : ContentPage
     {
+        public static bool updateTerm;
+        public static object temp;
+        public static object index;
+
         public MainPage()
         {
             InitializeComponent();
@@ -30,12 +34,21 @@ namespace App1
 
         private void addTermButton_Clicked(object sender, EventArgs e)
         {
+            updateTerm = false;
             Navigation.PushAsync(new AUTerm());
         }
 
         private void updateTermButton_Clicked(object sender, EventArgs e)
         {
+            
+            
+            index = termListVeiw.SelectedItem;
             Navigation.PushAsync(new AUTerm());
+            updateTerm = true;
+
+            
+  
+            
         }
 
         private void deleteTermButton_Clicked(object sender, EventArgs e)
@@ -57,8 +70,17 @@ namespace App1
                 con.CreateTable<Table>();
                 var table = con.Table<Table>().ToList();
 
-                termTableView. = table;
+                termListVeiw.ItemsSource = table;
+                termListVeiw.SelectedItem = table[0];
+                
             }
+
+            
         }
+
+        
+
+
+
     }
 }
