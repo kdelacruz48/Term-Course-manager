@@ -13,6 +13,8 @@ namespace App1
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AUTerm : ContentPage
     {
+
+        public static Table table = new Table();
         public AUTerm()
         {
             InitializeComponent();
@@ -20,53 +22,46 @@ namespace App1
 
         private void ToolbarItem_Clicked(object sender, EventArgs e) // save
         {
+            //Table table = new Table()
+            // {
+            table.termName = entryTermName.Text;
+            table.termStart = datePickerTermStart.Date.ToShortDateString();
+            table.termEnd = DatePickerTermEnd.Date.ToShortDateString();
 
-            if (MainPage.updateTerm == false)
+           // };
+
+          
+                
+
+            using (SQLite.SQLiteConnection con = new SQLite.SQLiteConnection(App.FilePath))
             {
-                Table table = new Table()
+                con.CreateTable<Table>();
+
+                if (MainPage.updateTerm == false)
                 {
-                    termName = entryTermName.Text,
-                    termStart = datePickerTermStart.Date.ToShortDateString(),
-                    termEnd = DatePickerTermEnd.Date.ToShortDateString()
-
-                };
-
-                using (SQLite.SQLiteConnection con = new SQLite.SQLiteConnection(App.FilePath))
-                {
-                    con.CreateTable<Table>();
-                    con.Update(table);
-
-                }
-
-                Navigation.PushAsync(new MainPage());
-
-            }
-            else
-            {
-                Table table = new Table()
-                {
-                    termName = entryTermName.Text,
-                    termStart = datePickerTermStart.Date.ToShortDateString(),
-                    termEnd = DatePickerTermEnd.Date.ToShortDateString()
-
-                };
-
-                Table update = new Table()
-                {
-
-                }
-
-                using (SQLite.SQLiteConnection con = new SQLite.SQLiteConnection(App.FilePath))
-                {
-                    con.CreateTable<Table>();
                     con.Insert(table);
-
                 }
 
-                Navigation.PushAsync(new MainPage());
+                else
+                {
+                    var temp = MainPage.index as Table;
+
+                    con.Update(new Table
+                    {
+                        iD = temp.iD,
+                        termName = entryTermName.Text,
+                        termStart = datePickerTermStart.Date.ToShortDateString(),
+                        termEnd = DatePickerTermEnd.Date.ToShortDateString()
 
 
+                    }) ;
+                }
             }
+
+            Navigation.PushAsync(new MainPage());
+
+            
+           
         }
         protected override void OnAppearing()
         {

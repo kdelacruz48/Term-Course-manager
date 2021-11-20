@@ -14,8 +14,10 @@ namespace App1
     public partial class MainPage : ContentPage
     {
         public static bool updateTerm;
+        public static bool deleteTerm;
         public static object temp;
         public static object index;
+        public static object deleteIndex;
 
         public MainPage()
         {
@@ -53,6 +55,16 @@ namespace App1
 
         private void deleteTermButton_Clicked(object sender, EventArgs e)
         {
+            using (SQLite.SQLiteConnection con = new SQLite.SQLiteConnection(App.FilePath))
+            {
+                
+                var temp = termListVeiw.SelectedItem as Table;
+                var id = temp.iD;
+
+                
+                    
+                con.Delete<Table>(temp.iD);
+            }
 
         }
 
@@ -71,8 +83,11 @@ namespace App1
                 var table = con.Table<Table>().ToList();
 
                 termListVeiw.ItemsSource = table;
-                termListVeiw.SelectedItem = table[0];
-                
+
+                if (table.Count > 0)
+                {
+                    termListVeiw.SelectedItem = table[0];
+                }
             }
 
             
