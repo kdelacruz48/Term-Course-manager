@@ -64,8 +64,13 @@ namespace App1
                 
                     
                 con.Delete<Table>(temp.iD);
-            }
 
+                con.CreateTable<Table>();
+                var table = con.Table<Table>().ToList();
+
+                termListVeiw.ItemsSource = table;
+            }
+         
         }
 
         private void coursesButton_Clicked(object sender, EventArgs e)

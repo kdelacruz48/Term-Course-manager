@@ -1,4 +1,6 @@
-﻿using System;
+﻿using App1.Classes;
+using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,6 +42,15 @@ namespace App1
         private void assesmentsButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Assesments());
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            
+
+
         }
     }
 }

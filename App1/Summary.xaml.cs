@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using App1.Classes;
 
 namespace App1
 {
@@ -20,7 +21,17 @@ namespace App1
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
+            using (SQLite.SQLiteConnection con = new SQLite.SQLiteConnection(App.FilePath))
+            {
+                con.CreateTable<Table>();
+                con.Update(new Table
+                {
+                   
+                    
 
+
+                }); 
+            }
         }
 
         private async void shareButton_Clicked(object sender, EventArgs e)

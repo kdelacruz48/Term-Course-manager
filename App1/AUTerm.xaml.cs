@@ -51,7 +51,8 @@ namespace App1
                         iD = temp.iD,
                         termName = entryTermName.Text,
                         termStart = datePickerTermStart.Date.ToShortDateString(),
-                        termEnd = DatePickerTermEnd.Date.ToShortDateString()
+                        termEnd = DatePickerTermEnd.Date.ToShortDateString(),
+                        
 
 
                     }) ;
