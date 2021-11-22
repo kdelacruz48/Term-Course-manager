@@ -18,6 +18,9 @@ namespace App1
         public static object temp;
         public static object index;
         public static object deleteIndex;
+        public static int termIndex;
+        public static object tempC;
+      
 
         public MainPage()
         {
@@ -42,13 +45,17 @@ namespace App1
 
         private void updateTermButton_Clicked(object sender, EventArgs e)
         {
-            
-            
-            index = termListVeiw.SelectedItem;
-            Navigation.PushAsync(new AUTerm());
-            updateTerm = true;
 
-            
+            if (termListVeiw.SelectedItem != null)
+            {
+                index = termListVeiw.SelectedItem;
+                Navigation.PushAsync(new AUTerm());
+                updateTerm = true;
+            }
+            else
+            {
+                DisplayAlert("Term", "Please select term", "ok");
+            }            
   
             
         }
@@ -59,23 +66,58 @@ namespace App1
             {
                 
                 var temp = termListVeiw.SelectedItem as Table;
-                var id = temp.iD;
 
-                
-                    
-                con.Delete<Table>(temp.iD);
+                if (termListVeiw.SelectedItem == null)
+                {
+                    DisplayAlert("Term", "No terms available for delete", "ok");
+                }
 
-                con.CreateTable<Table>();
-                var table = con.Table<Table>().ToList();
+                else
+                {
+                    var id = temp.iD;
 
-                termListVeiw.ItemsSource = table;
+
+
+                    con.Delete<Table>(temp.iD);
+
+                    con.CreateTable<Table>();
+                    var table = con.Table<Table>().ToList();
+
+                    termListVeiw.ItemsSource = table;
+
+                    if (table.Count > 0)
+                    {
+                        termListVeiw.SelectedItem = table[0];
+                    }
+                    else
+                    {
+                        termListVeiw.SelectedItem = null;
+                    }
+                }
             }
          
         }
 
         private void coursesButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Courses());
+            
+            Table temp = new Table();
+            
+            temp = termListVeiw.SelectedItem as Table;
+            
+            if (termListVeiw.SelectedItem == null)
+            {
+                DisplayAlert("Term", "Please select term", "fine, I guess I have no choice");
+            }
+            
+            else
+            {
+                
+                termIndex = temp.iD;
+                
+                Navigation.PushAsync(new Courses());
+            }
+            
         }
 
         protected override void OnAppearing()

@@ -19,11 +19,30 @@
             <Frame BackgroundColor="#2196F3" Padding="1" CornerRadius="0">
                 <Label Text="Courses" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
-
-            <Label Text="Select a course" FontSize="Title" Padding="30,24,30,0"/>
-            <Frame BackgroundColor="#2196F3" Padding="50" CornerRadius="0">
-                <Label Text="PlaceHolder" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-            </Frame>
+            <Label Text="Select a Course" FontSize="Title" Padding="30,24,30,0"/>
+            <ListView x:Name="courseListVeiw" >
+                <ListView.Header>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="course Name" TextColor="Purple"/>
+                        <Label Text="| Start"/>
+                        <Label Text="| End"/>
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal">
+                                    
+                                    <Label Text="{Binding courseName}"  TextColor="Purple"/>
+                                    <Label Text="{Binding courseStart}"/>
+                                    <Label Text="{Binding courseEnd}"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Button Text="Assesments"
                     x:Name="assesmentsButton"
                     Clicked="assesmentsButton_Clicked"/>
