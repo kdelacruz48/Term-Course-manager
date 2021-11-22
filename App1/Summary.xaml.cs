@@ -32,7 +32,7 @@ namespace App1
             course.instructorPhone = entryInstructorPhone.Text;
             course.notes = entryNotes.Text;
 
-            if (entryCourseName.Text == "")
+            if (entryCourseName.Text == "" || entryCourseName.Text == null)
             {
                 DisplayAlert("Course", "Please enter a valid name", "ok");
             }
@@ -44,19 +44,19 @@ namespace App1
             {
                 DisplayAlert("Course", "Please select course status", "ok");
             }
-            else if (entryInstructorName.Text == "")
+            else if (entryInstructorName.Text == "" || entryInstructorName.Text == null)
             {
                 DisplayAlert("Course", "Please enter instructor name", "ok");
             }
-            else if (entryInstructorPhone.Text == "")
+            else if (entryInstructorPhone.Text == "" || entryInstructorPhone.Text == null) 
             {
                 DisplayAlert("Course", "Please enter instructor phone", "ok");
             }
-            else if (entryInstructorEmail.Text == "")
+            else if (entryInstructorEmail.Text == "" || entryInstructorEmail.Text == null)
             {
                 DisplayAlert("Course", "Please enter instructor email", "ok");
             }
-            else if (entryNotes.Text == "")
+            else if (entryNotes.Text == "" || entryNotes.Text == null)
             {
                 DisplayAlert("Course", "Please enter notes, or type N/A", "ok");
             }
