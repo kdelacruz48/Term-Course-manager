@@ -28,41 +28,47 @@ namespace App1
             table.termStart = datePickerTermStart.Date.ToShortDateString();
             table.termEnd = DatePickerTermEnd.Date.ToShortDateString();
 
-           // };
+            // };
 
-          
-                
-
-            using (SQLite.SQLiteConnection con = new SQLite.SQLiteConnection(App.FilePath))
+            if (datePickerTermStart.Date > DatePickerTermEnd.Date)
             {
-                con.CreateTable<Table>();
-
-                if (MainPage.updateTerm == false)
-                {
-                    con.Insert(table);
-                }
-
-                else
-                {
-                    var temp = MainPage.index as Table;
-
-                    con.Update(new Table
-                    {
-                        iD = temp.iD,
-                        termName = entryTermName.Text,
-                        termStart = datePickerTermStart.Date.ToShortDateString(),
-                        termEnd = DatePickerTermEnd.Date.ToShortDateString(),
-                        
-
-
-                    }) ;
-                }
+                DisplayAlert("Term", "Start date is after end date", "ok");
             }
 
-            Navigation.PushAsync(new MainPage());
+            else
+            {
 
-            
-           
+
+                using (SQLite.SQLiteConnection con = new SQLite.SQLiteConnection(App.FilePath))
+                {
+                    con.CreateTable<Table>();
+
+                    if (MainPage.updateTerm == false)
+                    {
+                        con.Insert(table);
+                    }
+
+                    else
+                    {
+                        var temp = MainPage.index as Table;
+
+                        con.Update(new Table
+                        {
+                            iD = temp.iD,
+                            termName = entryTermName.Text,
+                            termStart = datePickerTermStart.Date.ToShortDateString(),
+                            termEnd = DatePickerTermEnd.Date.ToShortDateString(),
+
+
+
+                        });
+                    }
+                }
+
+                Navigation.PushAsync(new MainPage());
+
+
+            }
         }
         protected override void OnAppearing()
         {

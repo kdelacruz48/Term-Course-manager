@@ -32,39 +32,74 @@ namespace App1
             course.instructorPhone = entryInstructorPhone.Text;
             course.notes = entryNotes.Text;
 
-            using (SQLite.SQLiteConnection con = new SQLite.SQLiteConnection(App.FilePath))
+            if (entryCourseName.Text == "")
             {
-                con.CreateTable<CourseTable>();
-
-                if (Courses.updateCourse == false)
-                {
-                    con.Insert(course);
-                }
-
-                else
-                {
-                    var temp = Courses.indexC as CourseTable;
-
-                    con.Update(new CourseTable
-                    {
-                       courseId = temp.courseId,
-                       termId = MainPage.termIndex,
-                       courseName = entryCourseName.Text,
-                       courseStart = datePickerCourseStart.Date.ToShortDateString(),
-                       courseEnd = DatePickerCourseEnd.Date.ToShortDateString(),
-                       status = statusPicker.SelectedItem.ToString(),
-                       instructorName = entryInstructorName.Text,
-                       instructorEmail = entryInstructorEmail.Text,
-                       instructorPhone = entryInstructorPhone.Text,
-                       notes = entryNotes.Text
-
-
-
-                });
-                }
+                DisplayAlert("Course", "Please enter a valid name", "ok");
             }
+            else if (datePickerCourseStart.Date > DatePickerCourseEnd.Date)
+            {
+                DisplayAlert("Course", "Course start is after Course end", "ok");
+            }
+            else if (statusPicker.SelectedIndex == -1)
+            {
+                DisplayAlert("Course", "Please select course status", "ok");
+            }
+            else if (entryInstructorName.Text == "")
+            {
+                DisplayAlert("Course", "Please enter instructor name", "ok");
+            }
+            else if (entryInstructorPhone.Text == "")
+            {
+                DisplayAlert("Course", "Please enter instructor phone", "ok");
+            }
+            else if (entryInstructorEmail.Text == "")
+            {
+                DisplayAlert("Course", "Please enter instructor email", "ok");
+            }
+            else if (entryNotes.Text == "")
+            {
+                DisplayAlert("Course", "Please enter notes, or type N/A", "ok");
+            }
+            else
+            {
 
-            Navigation.PushAsync(new Courses());
+
+                using (SQLite.SQLiteConnection con = new SQLite.SQLiteConnection(App.FilePath))
+                {
+                    con.CreateTable<CourseTable>();
+
+                    if (Courses.updateCourse == false)
+                    {
+                        con.Insert(course);
+                    }
+
+                    else
+                    {
+                        var temp = Courses.indexC as CourseTable;
+
+                        con.Update(new CourseTable
+                        {
+                            courseId = temp.courseId,
+                            termId = MainPage.termIndex,
+                            courseName = entryCourseName.Text,
+                            courseStart = datePickerCourseStart.Date.ToShortDateString(),
+                            courseEnd = DatePickerCourseEnd.Date.ToShortDateString(),
+                            status = statusPicker.SelectedItem.ToString(),
+                            instructorName = entryInstructorName.Text,
+                            instructorEmail = entryInstructorEmail.Text,
+                            instructorPhone = entryInstructorPhone.Text,
+                            notes = entryNotes.Text
+
+
+
+                        });
+
+
+                    }
+                }
+
+                Navigation.PushAsync(new Courses());
+            }
         }
 
         private async void shareButton_Clicked(object sender, EventArgs e)
@@ -78,9 +113,10 @@ namespace App1
 
         protected override void OnAppearing()
         {
+            statusPicker.SelectedIndex = 0;
             if (Courses.updateCourse == true)
             {
-                var temp = Courses.indexC as CourseTable;
+                var temp = Courses.indexD as CourseTable;
                 entryCourseName.Text = temp.courseName;
 
                 DateTime start = DateTime.Parse(temp.courseStart);
@@ -95,7 +131,9 @@ namespace App1
                 entryInstructorEmail.Text = temp.instructorEmail;
                 entryNotes.Text = temp.notes;
 
-                
+
+
+                Courses.indexD = null;
 
             }
         }

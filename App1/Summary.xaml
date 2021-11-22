@@ -26,7 +26,7 @@
                 </DatePicker>
 
                 <Label Text="End Date"/>
-                <DatePicker x:Name="DatePickerCourseEnd" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                <DatePicker x:Name="DatePickerCourseEnd"  VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                 </DatePicker>
             </StackLayout>

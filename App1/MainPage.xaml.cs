@@ -84,7 +84,7 @@ namespace App1
                     var table = con.Table<Table>().ToList();
 
                     termListVeiw.ItemsSource = table;
-
+                    
                     if (table.Count > 0)
                     {
                         termListVeiw.SelectedItem = table[0];

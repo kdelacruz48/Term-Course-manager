@@ -16,6 +16,7 @@ namespace App1
     {
         public static bool updateCourse;
         public static object indexC;
+        public static object indexD;
 
 
         public Courses()
@@ -25,7 +26,7 @@ namespace App1
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PushAsync(new MainPage());
         }
 
         private void addCourseButton_Clicked(object sender, EventArgs e)
@@ -38,12 +39,14 @@ namespace App1
         {
             if (courseListVeiw.SelectedItem == null)
             {
-                DisplayAlert("Course", "PLease add a course", "ok");
+                DisplayAlert("Course", "Please add a course", "ok");
             }
             else
             {
                 updateCourse = true;
                 indexC = courseListVeiw.SelectedItem;
+                indexD = indexC;
+                courseListVeiw.SelectedItem = null;
                 Navigation.PushAsync(new Summary());
             }
         }
@@ -69,10 +72,18 @@ namespace App1
 
                     con.CreateTable<CourseTable>();
                     var table = con.Table<CourseTable>().ToList();
+                    List<CourseTable> tempList = new List<CourseTable>();
+                    foreach (var item in table)
+                    {
+                        if (item.termId == MainPage.termIndex)
+                        {
+                            tempList.Add(item);
+                        }
+                    }
 
-                    courseListVeiw.ItemsSource = table;
+                    courseListVeiw.ItemsSource = tempList;
 
-                    if (table.Count > 0)
+                    if (tempList.Count > 0)
                     {
                         courseListVeiw.SelectedItem = table[0];
                     }
@@ -91,7 +102,7 @@ namespace App1
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
+            courseListVeiw.SelectedItem = null;
             using (SQLiteConnection con = new SQLiteConnection(App.FilePath))
             {
                 con.CreateTable<CourseTable>();
@@ -107,9 +118,13 @@ namespace App1
 
                 courseListVeiw.ItemsSource = tempList;
 
-                if (table.Count > 0)
+                if (tempList.Count > 0)
                 {
                     courseListVeiw.SelectedItem = table[0];
+                }
+                else
+                {
+                    courseListVeiw.SelectedItem = null;
                 }
             }
 
