@@ -42,7 +42,7 @@
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                 </DatePicker>
             </StackLayout>
-            <Button Text="Notifications"/>
+            <Button Text="Delete Assesments" x:Name="deleteAssesmentButton" Clicked="deleteAssesmentButton_Clicked"/>
 
 
         </StackLayout>

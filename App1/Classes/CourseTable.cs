@@ -20,7 +20,11 @@ namespace App1.Classes
         public string instructorEmail { get; set; }
         public string notes { get; set; }
         public string oA { get; set; }
+        public string oAStart { get; set; }
+        public string oAEnd { get; set; }
         public string pA { get; set; }
+        public string paStart { get; set; }
+        public string paEnd { get; set; }
 
         public CourseTable()
         {

@@ -15,8 +15,10 @@ namespace App1
     public partial class Courses : ContentPage
     {
         public static bool updateCourse;
+        public static object indexA;
         public static object indexC;
         public static object indexD;
+        
 
 
         public Courses()
@@ -31,8 +33,31 @@ namespace App1
 
         private void addCourseButton_Clicked(object sender, EventArgs e)
         {
-            updateCourse = false;
-            Navigation.PushAsync(new Summary());
+            using (SQLiteConnection con = new SQLiteConnection(App.FilePath))
+            {
+                con.CreateTable<CourseTable>();
+                var table = con.Table<CourseTable>().ToList();
+                List<CourseTable> tempList = new List<CourseTable>();
+                foreach (var item in table)
+                {
+                    if (item.termId == MainPage.termIndex)
+                    {
+                        tempList.Add(item);
+                    }
+                }
+
+                if (tempList.Count >= 6)
+                {
+                    DisplayAlert("Course", "Term already has 6 courses", "ok");
+                }
+                else
+                {
+                    updateCourse = false;
+                    Navigation.PushAsync(new Summary());
+                    
+                }
+
+            }
         }
 
         private void updateCourseButton_Clicked(object sender, EventArgs e)
@@ -85,7 +110,7 @@ namespace App1
 
                     if (tempList.Count > 0)
                     {
-                        courseListVeiw.SelectedItem = table[0];
+                        courseListVeiw.SelectedItem = tempList[0];
                     }
                     else
                     {
@@ -94,15 +119,25 @@ namespace App1
                 }
             }
         }
-            private void assesmentsButton_Clicked(object sender, EventArgs e)
+        private void assesmentsButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Assesments());
+            if (courseListVeiw.SelectedItem == null)
+            {
+                DisplayAlert("Course", "Please select a course to add or update an assesment", "ok");
+            }
+
+            else
+            {
+                indexA = courseListVeiw.SelectedItem;
+
+                Navigation.PushAsync(new Assesments());
+            }
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            courseListVeiw.SelectedItem = null;
+            
             using (SQLiteConnection con = new SQLiteConnection(App.FilePath))
             {
                 con.CreateTable<CourseTable>();
@@ -120,7 +155,7 @@ namespace App1
 
                 if (tempList.Count > 0)
                 {
-                    courseListVeiw.SelectedItem = table[0];
+                    courseListVeiw.SelectedItem = tempList[0];
                 }
                 else
                 {
