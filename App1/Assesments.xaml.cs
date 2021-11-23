@@ -1,4 +1,5 @@
 ﻿using App1.Classes;
+using Plugin.LocalNotifications;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -132,6 +133,80 @@ namespace App1
             }
 
             Navigation.PushAsync(new Courses());
+        }
+
+        private void Notifications_Clicked(object sender, EventArgs e)
+        {
+
+            if (datePickerOAStart.Date > DatePickerOAEnd.Date || datePickerPAStart.Date > DatePickerPAEnd.Date)
+            {
+                DisplayAlert("Assesment", "start date cannot occur after end date", "ok");
+            }
+            else
+            {
+                using (SQLite.SQLiteConnection con = new SQLite.SQLiteConnection(App.FilePath))
+                {
+                    con.CreateTable<CourseTable>();
+
+                    var temp = Courses.indexA as CourseTable;
+
+                    con.Update(new CourseTable
+                    {
+                        courseId = temp.courseId,
+
+                        termId = temp.termId,
+                        courseName = temp.courseName,
+                        courseStart = temp.courseStart,
+                        courseEnd = temp.courseEnd,
+                        status = temp.status,
+                        instructorName = temp.instructorName,
+                        instructorEmail = temp.instructorName,
+                        instructorPhone = temp.instructorName,
+                        notes = temp.notes,
+
+
+
+                        oA = entryOA.Text,
+                        oAStart = datePickerOAStart.Date.ToShortDateString(),
+                        oAEnd = DatePickerOAEnd.Date.ToShortDateString(),
+                        pA = entryPA.Text,
+                        paStart = datePickerPAStart.Date.ToShortDateString(),
+                        paEnd = DatePickerPAEnd.Date.ToShortDateString()
+
+                    });
+                }
+                var oATime = DatePickerOAEnd.Date.ToShortDateString();
+                DateTime end = DateTime.Parse(oATime);
+                var endD = end.ToShortDateString();
+                var paTime = DatePickerPAEnd.Date.ToShortDateString();
+                DateTime end1 = DateTime.Parse(oATime);
+                var endD1 = end.ToShortDateString();
+
+                if (entryOA.Text == "" && entryPA.Text == "" || entryOA.Text == null && entryPA.Text == null)
+                {
+                    DisplayAlert("Assesment", "No Assesment saved for OA or PA", "ok");
+                }
+                else if (entryOA.Text == "" && entryPA.Text != "" || entryOA.Text == null && entryPA.Text != null)
+                {
+                    DisplayAlert("Assesment", "PA notification set for " + endD1, "ok");
+                    CrossLocalNotifications.Current.Show("Notification", "PA due", 2, end1);
+                }
+                else if (entryOA.Text != "" && entryPA.Text == "" || entryOA.Text != null && entryPA.Text == null)
+                {
+                    DisplayAlert("Assesment", "OA notification set for " + endD, "ok");
+                    CrossLocalNotifications.Current.Show("Notification", "OA due", 1, end);
+                }
+
+                else
+                {
+                    DisplayAlert("Assesment", "OA notification set for " + endD + "PA notification set for " + endD1, "ok");
+                    CrossLocalNotifications.Current.Show("Notification", "OA due", 1, end);
+                    CrossLocalNotifications.Current.Show("Notification", "PA due", 2, end1);
+                }
+            }
+
+            
+         
         }
     }
     

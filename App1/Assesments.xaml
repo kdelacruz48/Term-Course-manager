@@ -11,7 +11,8 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout>
+        <ScrollView>
+            <StackLayout>
             <Frame BackgroundColor="#2196F3" Padding="1" CornerRadius="0">
                 <Label Text="Assesments" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
@@ -42,9 +43,13 @@
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                 </DatePicker>
             </StackLayout>
+            
             <Button Text="Delete Assesments" x:Name="deleteAssesmentButton" Clicked="deleteAssesmentButton_Clicked"/>
+            <Label Text="Set Notifications for current due dates"/>
+            <Button Text="Set Notifications" x:Name="Notifications" Clicked="Notifications_Clicked"/>
 
 
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

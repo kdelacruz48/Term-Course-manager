@@ -57,7 +57,7 @@ namespace App1
                 entry1.instructorName = "Kyle Delacruz";
                 entry1.instructorPhone = "253-732-7805";
                 entry1.instructorEmail = "kdelac7@wgu.edu";
-                entry1.notes = "Thank you for grading my Assesment!";
+                entry1.notes = "Thank you for grading my Assessment!";
                 entry1.oA = "OA";
                 entry1.oAStart = DateTime.Now.Date.ToShortDateString();
                 entry1.oAEnd = DateTime.Now.Date.AddDays(10).ToShortDateString();
