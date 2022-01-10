@@ -174,19 +174,27 @@ namespace App1
             indexN = courseListVeiw.SelectedItem;
             var indexN1 = indexN as CourseTable;
 
-            DateTime endDay = DateTime.Parse(indexN1.courseEnd);
-            
-
-            if (indexN1.courseEnd == "" || indexN1.courseEnd == null)
+            if (indexN1 != null)
             {
-                DisplayAlert("Assesment", "Notification not set for course", "ok");
+
+                DateTime endDay = DateTime.Parse(indexN1.courseEnd);
+
+
+                if (indexN1.courseEnd == "" || indexN1.courseEnd == null)
+                {
+                    DisplayAlert("Assesment", "Notification not set for course", "ok");
+                }
+                else
+                {
+                    DisplayAlert("Assesment", "Notification set for " + indexN1.courseName + " for " + indexN1.courseEnd, "ok");
+                    CrossLocalNotifications.Current.Show("Notification", "PA due", 2, endDay);
+                }
             }
+
             else 
             {
-                DisplayAlert("Assesment", "Notification set for " +indexN1.courseName+" at " + indexN1.courseEnd, "ok");
-                CrossLocalNotifications.Current.Show("Notification", "PA due", 2, endDay);
+                DisplayAlert("notification", "No course available to set notifications for", "ok");
             }
-            
         }
     }
 }

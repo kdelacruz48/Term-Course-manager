@@ -13,6 +13,10 @@ namespace App1
 {
     public partial class MainPage : ContentPage
     {
+
+        
+
+
         public static bool updateTerm;
         public static bool deleteTerm;
         public static object temp;
@@ -107,7 +111,7 @@ namespace App1
             
             if (termListVeiw.SelectedItem == null)
             {
-                DisplayAlert("Term", "Please select term", "fine, I guess I have no choice");
+                DisplayAlert("Term", "Please select term", "ok");
             }
             
             else

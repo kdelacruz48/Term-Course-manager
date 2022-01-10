@@ -199,7 +199,7 @@ namespace App1
 
                 else
                 {
-                    DisplayAlert("Assesment", "OA notification set for " + endD + "PA notification set for " + endD1, "ok");
+                    DisplayAlert("Assesment", "OA notification set for " + endD + " PA notification set for " + endD1, "ok");
                     CrossLocalNotifications.Current.Show("Notification", "OA due", 1, end);
                     CrossLocalNotifications.Current.Show("Notification", "PA due", 2, end1);
                 }
